@@ -532,43 +532,49 @@ extension ChartDataSet: RangeReplaceableCollection {
         calcMinMax(entry: newElement)
         entries.append(newElement)
     }
-
+    
     public func remove(at position: Index) -> Element {
         let element = entries.remove(at: position)
         notifyDataSetChanged()
         return element
     }
-
+    
     public func removeFirst() -> Element {
         let element = entries.removeFirst()
         notifyDataSetChanged()
         return element
     }
-
+    
     public func removeFirst(_ n: Int) {
         entries.removeFirst(n)
         notifyDataSetChanged()
     }
-
+    
     public func removeLast() -> Element {
         let element = entries.removeLast()
         notifyDataSetChanged()
         return element
     }
-
+    
     public func removeLast(_ n: Int) {
         entries.removeLast(n)
         notifyDataSetChanged()
     }
-
+    
     public func removeSubrange<R>(_ bounds: R) where R : RangeExpression, Index == R.Bound {
         entries.removeSubrange(bounds)
         notifyDataSetChanged()
     }
-
+    
     @objc
     public func removeAll(keepingCapacity keepCapacity: Bool) {
         entries.removeAll(keepingCapacity: keepCapacity)
         notifyDataSetChanged()
     }
+
+    public func replaceSubrange<C>(_ subrange: Swift.Range<Int>, with newElements: C) where C : Collection, ChartDataEntry == C.Element {
+        entries.replaceSubrange(subrange, with: newElements)
+        notifyDataSetChanged()
+    }
+    
 }
